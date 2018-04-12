@@ -18,7 +18,7 @@ else:
 bot = wxpy.Bot(cache_path=True)
 bot.enable_puid('wxpy_puid.pkl')
 
-auto_reply_persons_1 = ['小墨', '刘莉莉','周彪', 'We are 伐木累', '文艺骚年聚落部']
+auto_reply_persons_1 = ['小墨', '刘莉莉', '周彪', 'We are 伐木累']
 auto_friends_1 = []
 for person in auto_reply_persons_1:
     auto_friends_1.append(wxpy.ensure_one(bot.chats().search(person)))
