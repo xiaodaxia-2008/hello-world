@@ -1,6 +1,9 @@
 class long:
     def lcs(self, s1, s2):
         # longest common substring
+        # c[i][j]: the length of longest common string endswith s1[i],s2[j]
+        # it is apprent that c[i][j] = c[i-1][j-1]+1 if s1[i]==s2[j], else c[i][j]=0
+        # for those i==0 or j==0, c[i][j]=1 if  s1[i]==s2[j], else c[i][j]=0
         max_length = 0
         startidx = -1
         c = [[0 for i in range(len(s2))] for j in range(len(s1))]
