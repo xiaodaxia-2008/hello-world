@@ -30,8 +30,28 @@ class long:
         :type s: str
         :rtype: str
         """
-        rs = s[::-1]
-        rst = self.lcs(s, rs)
+        length = 0
+        rst = ''
+        for i in range(len(s)):
+            templeneven = 0
+            k = min(i+1, len(s) - i)
+            for j in range(1, k):
+                if s[i-j] != s[i+j]:
+                    break
+                templeneven += 1
+            if 2*templeneven+1 > length:
+                length = 2*templeneven+1
+                rst = s[i-templeneven:i+templeneven+1]
+
+            templeneven = 0
+            k = min(i+1, len(s) - i - 1)
+            for j in range(k):
+                if s[i-j] != s[i+j+1]:
+                    break
+                templeneven += 1
+            if 2*templeneven > length:
+                length = 2*templeneven
+                rst = s[i-templeneven+1:i+templeneven+1]
         return rst
 
 
