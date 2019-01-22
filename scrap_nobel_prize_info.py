@@ -56,3 +56,13 @@ if __name__ == "__main__":
         msg_trans = translate(msg)
         file.write("\n"+msg_trans+"\n")
     file.close()
+    
+    # find the element contains specific text
+    # htmltext = """
+    # <html>
+    #     <p>hello</p>
+    #     <p>good morning</p>
+    # <html>"""
+
+    # page = html.fromstring(htmltext)
+    # page.xpath("//p[contains(text(), 'h')]/text()")  # ['hello']
