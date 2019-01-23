@@ -5,12 +5,12 @@ import urllib
 import hashlib
 import random
 
-# 在华为内部需要设置代理
-PASSWORD = "moyan*1984"
-USERNAME = "xiaozhen"
-USERID = "x00428488"
+# 如果设置代理
+PASSWORD = "********"
+USERNAME = "********"
+USERID = "******"
 
-proxy = f"{USERID}:{PASSWORD}@proxy.huawei.com:8080"
+proxy = f"{USERID}:{PASSWORD}@proxy.xxxxxx.com:8080"
 proxies = {"http": "http://" + proxy, "https": "http://" + proxy}
 
 
