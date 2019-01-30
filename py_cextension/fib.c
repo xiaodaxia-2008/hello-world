@@ -21,10 +21,11 @@ static PyObject *fib(PyObject *self, PyObject *args)
 {
     //  n用来存储python整数转换成c int的参数
     int n;
-    if (!PyArg_ParseTuple(args, 'i', &n))
+    // 注意是"i"，而不是'i'，前者返回指针，后者是个字符
+    if (!PyArg_ParseTuple(args, "i", &n))
         return NULL;
     // Py_BuildValue 应该是把类型转换为python类型，'i'应该是整数int
-    return Py_BuildValue('i', Cfib(n));
+    return Py_BuildValue("i", Cfib(n));
 }
 
 // 下面是把每一个函数的名字，指针，参数类型，描述写成一个列表
