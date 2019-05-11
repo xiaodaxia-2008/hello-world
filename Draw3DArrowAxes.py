@@ -1,24 +1,20 @@
 
 # coding: utf-8
-
-# In[1]:
-
-
-get_ipython().run_line_magic('matplotlib', 'notebook')
-
-
-# In[130]:
-
-
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-def arrow(ax, T, length=1):
-    ax.quiver(T[0, 3], T[1, 3], T[2, 3],T[0, 0], T[0, 1], T[0, 2], length=length, normalize=True, color=(1, 0, 0, 0.5))
-    ax.quiver(T[0, 3], T[1, 3], T[2, 3], T[1, 0],T[1, 1], T[1, 2], length=length, normalize=True, color=(0, 1, 0, 0.5))
-    ax.quiver(T[0, 3], T[1, 3], T[2, 3], T[2, 0], T[2, 1], T[2, 2], length=length, normalize=True, color=(0, 0, 1, 0.5))
+def arrow(ax, Ts, length=1):
+    draw_code = """ax.quiver(T[0, 3], T[1, 3], T[2, 3],T[0, 0], T[0, 1], T[0, 2], length=length, normalize=True, color=(1, 0, 0, 0.5))\n
+    ax.quiver(T[0, 3], T[1, 3], T[2, 3], T[1, 0],T[1, 1], T[1, 2], length=length, normalize=True, color=(0, 1, 0, 0.5))\n
+    ax.quiver(T[0, 3], T[1, 3], T[2, 3], T[2, 0], T[2, 1], T[2, 2], length=length, normalize=True, color=(0, 0, 1, 0.5))""".replace(" ", "")
+    if len(Ts.shape) == 3:
+        for T in Ts:
+            exec(draw_code)
+    elif len(Ts.shape) == 2:
+        T = Ts
+        exec(draw_code)
 
 def rotate(axis, deg):
     AXIS = ('X', 'Y', 'Z')
@@ -69,19 +65,21 @@ def trans(axis, dis):
     return trans_mat
 
 
-# In[131]:
+# In[22]:
 
 
-T = trans("x", 3).dot(trans("y", 3)).dot(trans("z", 4)).dot(rotate("x", np.pi/3))
+T1 = trans("x", 3).dot(trans("y", 3)).dot(trans("z", 4)).dot(rotate("x", np.pi/3))
+T2 = T1.dot(trans("x", -2))
+Ts = np.array([T1, T2])
 
 
-# In[132]:
+# In[23]:
 
 
-T
+Ts
 
 
-# In[133]:
+# In[24]:
 
 
 fig = plt.figure(figsize=(4, 3))
@@ -89,7 +87,7 @@ ax = fig.gca(projection="3d")
 # ax.quiver(0, 0, 0, 1, 0, 0, length=2, normalize=True, color=(0, 0, 1, 1))
 # ax.quiver(0, 0, 0, 0, 1, 0, length=2, normalize=True)
 # ax.quiver(0, 0, 0, 0, 0, 1, length=2, normalize=True)
-arrow(ax, T, 1)
+arrow(ax, Ts, 1)
 ax.set_xlim(0, 5)
 ax.set_ylim(0, 5)
 ax.set_zlim(0, 5)
