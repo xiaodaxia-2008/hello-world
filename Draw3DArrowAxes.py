@@ -5,10 +5,10 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 import matplotlib.pyplot as plt
 import numpy as np
 
-def arrow(ax, Ts, length=1):
-    draw_code = """ax.quiver(T[0, 3], T[1, 3], T[2, 3],T[0, 0], T[0, 1], T[0, 2], length=length, normalize=True, color=(1, 0, 0, 0.5))\n
-    ax.quiver(T[0, 3], T[1, 3], T[2, 3], T[1, 0],T[1, 1], T[1, 2], length=length, normalize=True, color=(0, 1, 0, 0.5))\n
-    ax.quiver(T[0, 3], T[1, 3], T[2, 3], T[2, 0], T[2, 1], T[2, 2], length=length, normalize=True, color=(0, 0, 1, 0.5))""".replace(" ", "")
+def arrow(ax, Ts, length=4):
+    draw_code = """ax.quiver(*T[:3, 3],*T[:3, 0], length=length, normalize=True, color=(1, 0, 0, 0.5))\n
+    ax.quiver(*T[:3, 3], *T[:3, 1], length=length, normalize=True, color=(0, 1, 0, 0.5))\n
+    ax.quiver(*T[:3, 3], *T[:3, 2], length=length, normalize=True, color=(0, 0, 1, 0.5))""".replace(" ", "")
     if len(Ts.shape) == 3:
         for T in Ts:
             exec(draw_code)
